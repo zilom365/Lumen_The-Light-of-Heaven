@@ -1,0 +1,170 @@
+/* ===== Lumen: soft header strip, ivory page, gentle golden light ===== */
+:root{
+  --ivory:#f7f2e6; --paper:#fffdf7; --navy:#14213d; --ink:#2a3350; --muted:#6b7390;
+  --gold:#c9a24b; --gold-soft:#e8d29a; --gold-deep:#8f6c22; --line:rgba(201,162,75,.45);
+  --sh:46vh;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;position:relative;background:var(--ivory);color:var(--ink);
+  font-family:"Nunito",system-ui,sans-serif;overflow-x:hidden;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body.inner{--sh:170px}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0;color:var(--navy)}
+
+/* ---------- HEADER STRIP ---------- */
+.strip{position:absolute;top:0;left:0;right:0;height:var(--sh);z-index:0;pointer-events:none;overflow:hidden;
+  transition:height 1s cubic-bezier(.2,.7,.2,1);
+  -webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.sky{position:absolute;inset:0;background:
+  radial-gradient(60% 80% at 50% 0%,rgba(255,236,176,.95),transparent 70%),
+  radial-gradient(40% 55% at 14% 30%,rgba(112,132,176,.6),transparent 70%),
+  radial-gradient(45% 55% at 86% 25%,rgba(104,122,166,.6),transparent 70%),
+  radial-gradient(35% 40% at 40% 72%,rgba(255,255,255,.85),transparent 70%),
+  radial-gradient(30% 40% at 68% 78%,rgba(255,255,255,.7),transparent 70%),
+  linear-gradient(#a9b5d0,#ebe3cf)}
+/* put your clouds-and-angels picture at assets/header.jpg */
+.img{position:absolute;inset:-4%;background:url(assets/header.jpg) center 30%/cover no-repeat;animation:drift 40s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.06) translate(-1%,1%)}}
+.rays{position:absolute;inset:0;mix-blend-mode:screen;transform-origin:50% -10%;
+  background:repeating-conic-gradient(from 160deg at 50% -10%,rgba(255,240,190,.30) 0 4deg,transparent 4deg 12deg);
+  animation:sway 12s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-3deg);opacity:.5}to{transform:rotate(3deg);opacity:1}}
+.brand{position:absolute;top:26px;left:0;right:0;text-align:center;font:italic 600 30px "Cormorant Garamond",serif;color:#fff;
+  text-shadow:0 2px 14px rgba(20,33,61,.6);opacity:0;transition:opacity .8s .3s}
+.inner .brand{opacity:1}
+
+/* ---------- AMBIENT LIGHT ---------- */
+#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.mote{position:absolute;border-radius:50%;background:radial-gradient(#fff6d0,rgba(232,210,154,0) 70%);will-change:transform,opacity}
+.spark{position:fixed;z-index:50;pointer-events:none;width:10px;height:10px;margin:-5px 0 0 -5px;
+  background:radial-gradient(#fff,#ffd36b 45%,transparent 70%);border-radius:50%}
+
+/* ---------- LAYOUT ---------- */
+main{position:relative;z-index:5}
+.screen{display:none}
+.screen.on{display:block;animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.screen:not(.login){max-width:600px;margin:0 auto;padding:96px 18px 60px}
+.login.on{max-width:440px;margin:0 auto;padding:calc(var(--sh) - 120px) 16px 40px}
+
+/* ---------- CARDS & TYPE ---------- */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;
+  box-shadow:0 18px 50px rgba(20,33,61,.14),0 0 0 6px rgba(255,253,247,.6)}
+.login-card{padding:30px 30px 24px;text-align:left}
+.logo{font:italic 600 58px/1 "Cormorant Garamond",serif;color:var(--navy);margin-bottom:18px;
+  background:linear-gradient(100deg,var(--navy) 40%,var(--gold) 50%,var(--navy) 60%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:glint 7s ease-in-out infinite}
+@keyframes glint{0%,60%{background-position:100% 0}100%{background-position:-50% 0}}
+.card h2{font-size:28px}
+.sub{font-size:13.5px;color:var(--muted);margin:2px 0 14px}
+.sub.left{margin:0 0 12px;font-size:15px}
+.big{font-size:36px;margin:8px 0 8px}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
+.note{font-size:12.5px;color:var(--muted);text-align:center;margin:14px 0 0}
+label{display:block;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+input{width:100%;padding:9px 0;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--navy);font:inherit;outline:none;
+  background-image:linear-gradient(var(--gold),var(--gold));background-size:0 2px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .4s}
+input:focus{background-size:100% 2px}
+input::placeholder{color:#a6adc2}
+input:disabled{opacity:.6}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- BUTTONS ---------- */
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+.btn{position:relative;overflow:hidden;display:block;width:100%;margin-top:18px;padding:15px 22px;border-radius:8px;
+  background:var(--navy);color:#fff;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 8px 20px rgba(20,33,61,.28);transition:transform .25s,box-shadow .3s;animation:breathe 3.6s ease-in-out infinite}
+.btn span{position:relative;z-index:1}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(232,210,154,.6) 50%,transparent 70%);transform:translateX(-120%)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,33,61,.32),0 0 26px rgba(201,162,75,.55)}
+.btn:hover::after{transform:translateX(120%);transition:transform .9s}
+.btn:active{transform:scale(.97)}
+@keyframes breathe{50%{box-shadow:0 8px 20px rgba(20,33,61,.28),0 0 22px rgba(201,162,75,.45)}}
+.ripple{position:absolute;border-radius:50%;background:rgba(232,210,154,.55);transform:scale(0);animation:ripple .7s ease-out forwards;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+.link{display:block;width:100%;margin-top:10px;padding:8px;font-size:12px;color:var(--muted);position:relative}
+.link::after{content:"";position:absolute;left:50%;bottom:4px;width:0;height:1px;background:var(--gold);transition:width .35s,left .35s}
+.link:hover{color:var(--navy)}.link:hover::after{width:90px;left:calc(50% - 45px)}
+.back{padding:6px 0;color:var(--navy);font-size:14px;transition:transform .25s}
+.back:hover{transform:translateX(-4px)}
+
+/* ---------- GRAVEYARD CHOOSER ---------- */
+.gy{display:grid;gap:10px}
+.gyb{position:relative;overflow:hidden;text-align:left;padding:14px 16px;border-radius:16px;background:var(--paper);border:1px solid var(--line);
+  transition:transform .25s,box-shadow .3s,border-color .3s;animation:rise .6s calc(var(--i)*.08s) both}
+.gyb b{display:block;font:600 21px "Cormorant Garamond",serif;color:var(--navy)}
+.gyb span{font-size:13px;color:var(--muted)}
+.gyb::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(232,210,154,.5) 50%,transparent 65%);transform:translateX(-120%)}
+.gyb:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(201,162,75,.28)}
+.gyb:hover::after{transform:translateX(120%);transition:transform .8s}
+.gyb[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,162,75,.35),0 12px 30px rgba(201,162,75,.3);background:linear-gradient(#fffdf7,#fbf3da)}
+.gyb[aria-pressed="true"]::before{content:"✦";position:absolute;right:16px;top:14px;color:var(--gold);animation:twinkle 1.8s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.35;transform:scale(.8)}}
+
+/* ---------- PEOPLE ---------- */
+.person{display:flex;gap:14px;align-items:center;width:100%;text-align:left;margin-top:8px;padding:10px 12px;border-radius:16px;
+  background:rgba(247,242,230,.7);border:1px solid rgba(201,162,75,.25);transition:transform .25s,border-color .3s,box-shadow .3s;
+  animation:rise .55s calc(var(--i)*.07s) both}
+.person:hover{transform:translateX(4px);border-color:var(--gold);box-shadow:0 8px 22px rgba(201,162,75,.22)}
+.person b{font:600 20px "Cormorant Garamond",serif;color:var(--navy)}
+.person small{color:var(--muted);font-size:12.5px}
+.av{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font:600 19px "Cormorant Garamond",serif;color:var(--navy);
+  background:radial-gradient(#fffdf7 55%,var(--gold-soft));border:1px solid var(--gold)}
+.big-av{width:92px;height:92px;font-size:36px;border:0;margin:0}
+.who{text-align:center}
+.ring{width:104px;height:104px;margin:0 auto;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(from 0deg,var(--gold),#fff3c4,var(--gold-deep),#fff3c4,var(--gold));animation:spin 8s linear infinite;box-shadow:0 0 34px rgba(201,162,75,.6)}
+.ring .av{animation:spin 8s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.years{color:var(--muted);letter-spacing:.12em}
+.candle{display:inline-flex;gap:8px;align-items:center;margin-top:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:13px;color:var(--navy);transition:box-shadow .3s,transform .25s}
+.candle:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,162,75,.35)}
+.candle .flame{opacity:0;transform-origin:12px 16px;transition:opacity .6s}
+.candle.lit{box-shadow:0 0 30px rgba(255,211,107,.75);background:#fff9e3}
+.candle.lit .flame{opacity:1;animation:flicker 1.4s ease-in-out infinite alternate}
+@keyframes flicker{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.9,1.1) rotate(2deg)}}
+
+/* ---------- MAP ---------- */
+.mapwrap{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 0%,#27407a,#0f1d3d 70%);box-shadow:0 18px 50px rgba(20,33,61,.3)}
+.flow{stroke-dasharray:10 8;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-36}}
+.pulse{animation:pulse 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{50%{transform:scale(1.7);opacity:.5}}
+
+/* ---------- TABS & MEMORIAL ---------- */
+.tabs{display:flex;gap:6px;margin:16px 0 12px;overflow-x:auto;border-bottom:1px solid var(--line)}
+.tabs button{padding:10px 14px;white-space:nowrap;color:var(--muted);position:relative;transition:color .25s}
+.tabs button::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .35s}
+.tabs button:hover{color:var(--navy)}
+.tabs button.on{color:var(--navy);font-weight:700}.tabs button.on::after{transform:scaleX(1)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ph{aspect-ratio:1;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line);position:relative;overflow:hidden;
+  animation:rise .6s calc(var(--i)*.07s) both;transition:transform .3s,box-shadow .3s}
+.ph svg{width:38%;fill:none;stroke:var(--gold-deep);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%);transform:translateX(-130%)}
+.ph:hover{transform:scale(1.04);box-shadow:0 10px 24px rgba(201,162,75,.35)}.ph:hover::after{transform:translateX(130%);transition:transform .8s}
+.vn{display:flex;gap:12px;align-items:center;background:rgba(247,242,230,.8);border:1px solid rgba(201,162,75,.25);border-radius:16px;padding:10px 12px;margin-top:8px}
+.vn .pl{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;transition:transform .25s,box-shadow .3s}
+.vn .pl:hover{transform:scale(1.1);box-shadow:0 0 18px rgba(201,162,75,.7)}
+.bars{display:flex;gap:3px;align-items:center;height:28px;flex:1}
+.bars i{display:block;width:4px;background:#b7bfd6;border-radius:2px}
+.bars.play i{background:var(--gold);animation:eq .6s ease-in-out infinite alternate}
+@keyframes eq{to{transform:scaleY(.35)}}
+.cap{font-size:13px;color:var(--muted);margin:2px 0 0 4px}
+.lock{text-align:center;padding:24px 8px}
+.lock .glyph{font-size:44px;color:var(--gold);animation:twinkle 2.4s ease-in-out infinite}
+.lock .btn{display:inline-block;width:auto}
+.chat{height:250px;overflow:auto;background:rgba(247,242,230,.7);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.b{padding:10px 14px;border-radius:16px;max-width:84%;animation:rise .4s both}
+.me{align-self:flex-end;background:var(--navy);color:#fff}
+.them{align-self:flex-start;background:var(--paper);border:1px solid var(--line)}
+.notice{background:rgba(201,162,75,.12);border:1px dashed var(--gold);border-radius:14px;padding:12px;font-size:14px;margin-bottom:10px}
+.notice label{display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font-size:13.5px;color:inherit}
+.notice input{width:auto;margin:0}
+.row{display:flex;gap:8px;align-items:center;margin-top:8px}
+.row .btn{width:auto;margin:0;padding:12px 20px}
+.row input{flex:1}
+
+@media (max-width:480px){.login.on{padding-top:calc(var(--sh) - 90px)}.login-card{padding:24px 22px}.logo{font-size:50px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lumen – Light for the ones we love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SOFT HEADER STRIP: clouds and angels fading into the ivory page -->
+<header class="strip" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="img"></div>
+  <div class="rays"></div>
+  <div class="brand">Lumen</div>
+</header>
+<div id="fx" aria-hidden="true"></div>
+
+<main>
+
+  <!-- 1. LOGIN: card rests on the edge of the strip -->
+  <section class="screen on login" id="s-login">
+    <div class="card login-card">
+      <h1 class="logo">Lumen</h1>
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to find your loved one.</p>
+      <label for="em">Email</label>
+      <input id="em" value="family@example.com" autocomplete="email">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" value="demo1234" autocomplete="current-password">
+      <button class="btn full" onclick="go('s-find')"><span>Sign in</span></button>
+      <button class="link full" onclick="go('s-find')">Continue as guest</button>
+    </div>
+   
+  </section>
+
+  <!-- 2. CHOOSE A GRAVEYARD, THEN FIND A NAME -->
+  <section class="screen" id="s-find">
+    <h2 class="big">Who are you looking for?</h2>
+    <p class="sub left">First choose the graveyard.</p>
+    <div id="gy" class="gy"></div>
+
+    <div class="card" id="people" style="margin-top:16px">
+      <div id="ph-title" class="eyebrow">People</div>
+      <input id="q" placeholder="Choose a graveyard first" oninput="renderList()" disabled>
+      <div id="list"></div>
+    </div>
+    <button class="back" onclick="go('s-login')">‹ Sign out</button>
+  </section>
+
+  <!-- 3. MAP -->
+  <section class="screen" id="s-map">
+    <button class="back" onclick="go('s-find')">‹ Back to search</button>
+    <div class="eyebrow" id="mg"></div>
+    <h2 class="big" id="mt"></h2>
+    <p class="sub left" id="ms"></p>
+    <div class="mapwrap"><svg id="map" viewBox="0 0 400 500" width="100%"></svg></div>
+    <button class="btn full" onclick="openMemorial()"><span>I am at the stone: scan QR (demo)</span></button>
+   
+  </section>
+
+  <!-- 4. MEMORIAL -->
+  <section class="screen" id="s-mem">
+    <button class="back" onclick="go('s-map')">‹ Back to map</button>
+    <div class="who">
+      <div class="ring"><div class="av big-av" id="mav"></div></div>
+      <h2 class="big" id="mn"></h2>
+      <div class="years" id="my"></div>
+      <button class="candle" id="candle" onclick="lightCandle(event)" aria-pressed="false">
+        <svg viewBox="0 0 24 40" width="22" height="36" aria-hidden="true">
+          <g class="flame"><path d="M12 2c3 5 5 8 5 12a5 5 0 0 1-10 0c0-4 2-7 5-12z" fill="#ffd36b"/><path d="M12 9c1.5 2.5 2.5 4 2.5 6a2.5 2.5 0 0 1-5 0c0-2 1-3.500 2.500-6z" fill="#fff6d6"/></g>
+          <rect x="8" y="20" width="8" height="18" rx="2" fill="#f4ecd6" stroke="#c9a24b"/>
+          <path d="M12 17v4" stroke="#6b5a2a" stroke-width="1.5"/>
+        </svg>
+        <span id="candle-t">Light a candle</span>
+      </button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div id="tc"></div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
